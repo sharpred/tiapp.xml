@@ -628,7 +628,6 @@ describe('Tiapp', function() {
             should.not.exist(tiapp.android.application.hasCode);
             tiapp.android.application.theme.should.equal("@style/Theme.NoActionBar");
         });
-
         it('android permissions and uses-permissions', function() {
             var tiapp = tiappXml.parse('<ti:app xmlns:ti="http://ti.appcelerator.org"><id>com.example.test</id><publisher>appcelerator</publisher><android xmlns:android="http://schemas.android.com/apk/res/android"><manifest><uses-permission android:name="android.permission.INTERNET"/><uses-permission android:name="android.permission.GET_ACCOUNTS"/><uses-permission android:name="android.permission.WAKE_LOCK"/><uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/><uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/><uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/><uses-permission android:name="android.permission.READ_PHONE_STATE"/><uses-permission android:name="android.permission.VIBRATE"/><uses-permission android:name="android.permission.READ_CALENDAR"/><uses-permission android:name="android.permission.WRITE_CALENDAR"/><uses-permission android:maxSdkVersion="18" android:name="android.permission.WRITE_EXTERNAL_STORAGE"/></manifest></android></ti:app>');
             var tmpFile = path.resolve('tmp', 'android.tiapp.xml');
@@ -661,6 +660,10 @@ describe('Tiapp', function() {
             permissions.should.containEql('android.permission.CAMERA');
             permissions.should.containEql('com.example.SOMECUSTOMPERMISSION');
             tiapp.write(tmpFile);
+        });
+
+        it('set any android manifest element', function() {
+
         });
     });
 
