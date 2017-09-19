@@ -94,14 +94,14 @@ describe('Tiapp generic', function() {
         it('should load given a file', function() {
             var tiapp = tiappXml.load(TIAPP_XML);
             tiapp.file.should.equal(TIAPP_XML);
-            tiapp.should.be.loadedTiapp
+            tiapp.should.be.loadedTiapp;
         });
 
         it('should load without a file via find()', function() {
             process.chdir(TESTFIND_END);
             var tiapp = tiappXml.load();
             tiapp.file.should.equal(TESTFIND_TIAPP_XML);
-            tiapp.should.be.loadedTiapp
+            tiapp.should.be.loadedTiapp;
         });
 
         INVALID_TIAPP_ARGS.forEach(function(arg) {
@@ -118,11 +118,11 @@ describe('Tiapp generic', function() {
 
         it('should parse given xml', function() {
             var tiapp = tiappXml.parse(fs.readFileSync(TIAPP_XML, 'utf8'), TIAPP_XML);
-            tiapp.should.be.loadedTiapp
+            tiapp.should.be.loadedTiapp;
             tiapp.file.should.equal(TIAPP_XML);
 
             tiapp = tiappXml.parse(fs.readFileSync(TESTFIND_TIAPP_XML, 'utf8'), TESTFIND_TIAPP_XML);
-            tiapp.should.be.loadedTiapp
+            tiapp.should.be.loadedTiapp;
             tiapp.file.should.equal(TESTFIND_TIAPP_XML);
         });
 
@@ -186,12 +186,12 @@ describe('Tiapp generic', function() {
         it('should get single deployment-target', function() {
             var tiapp = tiappXml.load(TIAPP_XML);
 
-            tiapp.getDeploymentTarget('android').should.be.true
-            tiapp.getDeploymentTarget('blackberry').should.be.true
-            tiapp.getDeploymentTarget('iphone').should.be.true
-            tiapp.getDeploymentTarget('ipad').should.be.true
-            tiapp.getDeploymentTarget('mobileweb').should.be.true
-            tiapp.getDeploymentTarget('tizen').should.be.true
+            tiapp.getDeploymentTarget('android').should.be.true;
+            tiapp.getDeploymentTarget('blackberry').should.be.true;
+            tiapp.getDeploymentTarget('iphone').should.be.true;
+            tiapp.getDeploymentTarget('ipad').should.be.true;
+            tiapp.getDeploymentTarget('mobileweb').should.be.true;
+            tiapp.getDeploymentTarget('tizen').should.be.true;
             should.equal(tiapp.getDeploymentTarget('what?'), null);
             should.equal(tiapp.getDeploymentTarget(123), null);
             should.equal(tiapp.getDeploymentTarget(function() {
@@ -204,7 +204,7 @@ describe('Tiapp generic', function() {
             // with an "s"
             var targets = tiapp.getDeploymentTargets();
             should.exist(targets);
-            targets.should.be.an.Object
+            targets.should.be.an.Object;
             targets.android.should.equal(true);
             targets.blackberry.should.equal(true);
             targets.ipad.should.equal(true);
@@ -215,7 +215,7 @@ describe('Tiapp generic', function() {
             // without an "s"
             targets = tiapp.getDeploymentTarget();
             should.exist(targets);
-            targets.should.be.an.Object
+            targets.should.be.an.Object;
             targets.android.should.equal(true);
             targets.blackberry.should.equal(true);
             targets.ipad.should.equal(true);
@@ -231,12 +231,12 @@ describe('Tiapp generic', function() {
             tiapp.setDeploymentTarget('blackberry', false);
             tiapp.setDeploymentTarget('mobileweb', false);
             tiapp.setDeploymentTarget('tizen', false);
-            tiapp.getDeploymentTarget('android').should.be.false
-            tiapp.getDeploymentTarget('blackberry').should.be.false
-            tiapp.getDeploymentTarget('iphone').should.be.true
-            tiapp.getDeploymentTarget('ipad').should.be.true
-            tiapp.getDeploymentTarget('mobileweb').should.be.false
-            tiapp.getDeploymentTarget('tizen').should.be.false
+            tiapp.getDeploymentTarget('android').should.be.false;
+            tiapp.getDeploymentTarget('blackberry').should.be.false;
+            tiapp.getDeploymentTarget('iphone').should.be.true;
+            tiapp.getDeploymentTarget('ipad').should.be.true;
+            tiapp.getDeploymentTarget('mobileweb').should.be.false;
+            tiapp.getDeploymentTarget('tizen').should.be.false;
 
             // TODO: test bad data for setDeploymentTarget
             // TODO: return null id <deployment-targets> doesn't exist
@@ -248,7 +248,7 @@ describe('Tiapp generic', function() {
             // get existing targets
             var targets = tiapp.getDeploymentTargets();
             should.exist(targets);
-            targets.should.be.an.Object
+            targets.should.be.an.Object;
             targets.android.should.equal(true);
             targets.blackberry.should.equal(true);
             targets.ipad.should.equal(true);
@@ -264,7 +264,7 @@ describe('Tiapp generic', function() {
             // get them again and make sure the set worked
             targets = tiapp.getDeploymentTargets();
             should.exist(targets);
-            targets.should.be.an.Object
+            targets.should.be.an.Object;
             targets.android.should.equal(true);
             targets.blackberry.should.equal(false);
             targets.ipad.should.equal(true);
@@ -310,7 +310,7 @@ describe('Tiapp generic', function() {
 
             var modules = tiapp.getModules();
             should.exist(modules);
-            modules.should.be.an.Array
+            modules.should.be.an.Array;
             modules.length.should.equal(5);
 
             var tests = [{
@@ -354,7 +354,7 @@ describe('Tiapp generic', function() {
                 return m.id.indexOf('lukasavage') !== -1;
             });
             should.exist(modules);
-            modules.should.be.an.Array
+            modules.should.be.an.Array;
             modules.length.should.equal(4);
 
             modules[0].id.should.equal('tony.lukasavage');
@@ -381,7 +381,7 @@ describe('Tiapp generic', function() {
                 return m.id === 'whitney.lukasavage';
             });
             should.exist(modules);
-            modules.should.be.an.Array
+            modules.should.be.an.Array;
             modules.length.should.equal(1);
 
             modules[0].id.should.equal('whitney.lukasavage');
@@ -417,7 +417,7 @@ describe('Tiapp generic', function() {
 
             var modules = tiapp.getModules();
             should.exist(modules);
-            modules.should.be.an.Array
+            modules.should.be.an.Array;
             modules.length.should.equal(2);
 
             (function() {
@@ -431,10 +431,10 @@ describe('Tiapp generic', function() {
 
             var plugins = tiapp.getPlugins();
             should.exist(plugins);
-            plugins.should.be.an.Array
+            plugins.should.be.an.Array;
             plugins.length.should.equal(1);
 
-            plugins[0].should.be.an.Object
+            plugins[0].should.be.an.Object;
             plugins[0].id.should.equal('ti.alloy');
             plugins[0].version.should.equal('1.0');
         });
@@ -448,18 +448,18 @@ describe('Tiapp generic', function() {
 
             var plugins = tiapp.getPlugins();
             should.exist(plugins);
-            plugins.should.be.an.Array
+            plugins.should.be.an.Array;
             plugins.length.should.equal(3);
 
-            plugins[0].should.be.an.Object
+            plugins[0].should.be.an.Object;
             plugins[0].id.should.equal('ti.alloy');
             plugins[0].version.should.equal('1.0');
 
-            plugins[1].should.be.an.Object
+            plugins[1].should.be.an.Object;
             plugins[1].id.should.equal('some.plugin');
             should.not.exist(plugins[1].version);
 
-            plugins[2].should.be.an.Object
+            plugins[2].should.be.an.Object;
             plugins[2].id.should.equal('another.plugin');
             plugins[2].version.should.equal('3.3');
 
@@ -468,10 +468,10 @@ describe('Tiapp generic', function() {
 
             plugins = tiapp.getPlugins();
             should.exist(plugins);
-            plugins.should.be.an.Array
+            plugins.should.be.an.Array;
             plugins.length.should.equal(3);
 
-            plugins[0].should.be.an.Object
+            plugins[0].should.be.an.Object;
             plugins[0].id.should.equal('ti.alloy');
             plugins[0].version.should.equal('2.0');
         });
@@ -483,7 +483,7 @@ describe('Tiapp generic', function() {
 
             var plugins = tiapp.getPlugins();
             should.exist(plugins);
-            plugins.should.be.an.Array
+            plugins.should.be.an.Array;
             plugins.length.should.equal(0);
 
             (function() {
