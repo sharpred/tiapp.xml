@@ -383,10 +383,17 @@ Set and get `team-id` and `min-ios-ver`. All other ios properties are not suppor
 
 ```js
 var tiapp = require('tiapp.xml').load('./tiapp.xml');
+//with helper methods:
 console.log(tiapp.getIosProperty("team-id"));
 console.log(tiapp.getIosProperty("min-ios-ver"));
 tiapp.setIosProperty("team-id", "ABC123XY99");
 tiapp.setIosProperty("min-ios-ver", "11.0");
+//with dot notation
+tiapp.ios["team-id"] = "ABC123XY99";
+tiapp.ios["min-ios-ver"] = "11.0";
+//with camelized properties
+tiapp.ios.teamId = "ABC123XY9x";
+tiapp.ios.minIosVer = "12.0";
 tiapp.write();
 ```
 
