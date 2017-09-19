@@ -42,7 +42,7 @@ if (!fs.existsSync(TMP)) {
 }
 
 // test suite
-describe('Tiapp', function() {
+describe('Tiapp generic', function() {
 
     beforeEach(function() {
         process.chdir(ROOT);

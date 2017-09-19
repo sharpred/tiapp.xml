@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app 
+  xmlns:ti="http://ti.appcelerator.org">
+  <id>com.example.test</id>
+  <name>Test</name>
+  <version>0.0.1</version>
+  <publisher>Test</publisher>
+  <url>http://www.example.com</url>
+  <description>test App</description>
+  <copyright>2014 Step Up Software</copyright>
+  <icon>appicon.png</icon>
+  <persistent-wifi>false</persistent-wifi>
+  <prerendered-icon>true</prerendered-icon>
+  <statusbar-style>default</statusbar-style>
+  <statusbar-hidden>true</statusbar-hidden>
+  <fullscreen>false</fullscreen>
+  <navbar-hidden>false</navbar-hidden>
+  <analytics>false</analytics>
+  <wibble>vvv</wibble>
+  <property name="ti.ui.defaultunit" type="string">dip</property>
+  <ios>
+    <min-ios-ver>9.2</min-ios-ver>
+    <team-id>5G7A26NNNN</team-id>
+    <orientations device="iphone">
+      <orientation>Ti.UI.PORTRAIT</orientation>
+      <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+    </orientations>
+    <orientations device="ipad">
+      <orientation>Ti.UI.PORTRAIT</orientation>
+      <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+      <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+      <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
+    </orientations>
+    <plist>
+      <dict>
+        <key>NSCameraUsageDescription</key>
+        <string>Can we use your camera?</string>
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string>Can we save to your library?</string>
+      </dict>
+    </plist>
+  </ios>
+  <android 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <manifest android:installLocation="preferExternal" android:versionCode="233" android:versionName="2.3.3">
+      <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>
+      <application android:theme="@style/Theme.Custom"/>
+    </manifest>
+  </android>
+  <mobileweb>
+    <precache/>
+    <splash>
+      <enabled>true</enabled>
+      <inline-css-images>true</inline-css-images>
+    </splash>
+    <theme>default</theme>
+  </mobileweb>
+  <modules>
+    <module platform="commonjs">ti.cloud</module>
+  </modules>
+  <deployment-targets>
+    <target device="android">true</target>
+    <target device="ipad">true</target>
+    <target device="iphone">true</target>
+    <target device="mobileweb">false</target>
+  </deployment-targets>
+  <sdk-version>6.2.0.GA</sdk-version>
+  <guid>e982d4fa-912b-44ea-9ccc-a1e6a7fee7ef</guid>
+  <property name="appc-app-id" type="string">59ba3f1e209317223e0fe7f9</property>
+  <property name="acs-authbase-url-development" type="string">https://secure-identity.cloud.appcelerator.com</property>
+  <property name="acs-base-url-development" type="string">https://api.cloud.appcelerator.com</property>
+  <property name="acs-oauth-secret-development" type="string">cSx0I3gLJo3h6Hh6xYZ1nrHxMgkMqQkQ</property>
+  <property name="acs-oauth-key-development" type="string">aJjDjtP5zMusuL6sRoWP4Z43cxmo8ReK</property>
+  <property name="acs-api-key-development" type="string">pro3Q8HV6wUSBQZRFOZ69HxmDzKPxJAM</property>
+  <property name="acs-username-development" type="string">appc_app_user_dev</property>
+  <property name="acs-password-development" type="string">90mTtUSlPci58wBEHM</property>
+  <property name="acs-authbase-url-production" type="string">https://secure-identity.cloud.appcelerator.com</property>
+  <property name="acs-base-url-production" type="string">https://api.cloud.appcelerator.com</property>
+  <property name="acs-oauth-secret-production" type="string">X3wcxUwSOt36cA4Th3nCl4HYGJCUJDNY</property>
+  <property name="acs-oauth-key-production" type="string">jNaGGwRb1rmkdfwLwXodJBqQuHXbixMg</property>
+  <property name="acs-api-key-production" type="string">fo0yBxYTKFQDdslLjPMSvJUpDiBgzP0N</property>
+  <property name="acs-username-production" type="string">appc_app_user</property>
+  <property name="acs-password-production" type="string">NQV2sfdQaf8xPxiPbL</property>
+  <property name="appc-org-id" type="string">100000746</property>
+  <property name="appc-creator-user-id" type="string">0f53dd3212ae7e7683190c619a04b69c</property>
+</ti:app>

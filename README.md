@@ -377,6 +377,20 @@ tiapp.removePlugin('ti.alloy');
 tiapp.write();
 ```
 
+### ios elements
+
+Set and get `team-id` and `min-ios-ver`. All other ios properties are not supported for now.
+
+```js
+var tiapp = require('tiapp.xml').load('./tiapp.xml');
+console.log(tiapp.getIosProperty("team-id"));
+console.log(tiapp.getIosProperty("min-ios-ver"));
+tiapp.setIosProperty("team-id", "ABC123XY99");
+tiapp.setIosProperty("min-ios-ver", "11.0");
+tiapp.write();
+```
+
+
 ### doc
 
 A direct reference to the underlying XML Document object as supplied by [xmldom](https://github.com/jindw/xmldom). You will not need to use this in most cases and should use the tiapp.xml module APIs instead.
