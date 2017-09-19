@@ -44,7 +44,7 @@ module.exports = function(grunt) {
                 },
                 src : ['test/*_test.js']
             },
-            src : ['lib/tiapp.xml.js']
+            src : ['lib/tiapp.xml.js', 'lib/Tiapp.js', 'lib/constants.js', 'lib/androidConstants.js', 'lib/util.js', 'lib/xml.js']
         },
         clean : {
             src : ['tmp']
