@@ -21,6 +21,26 @@
   <ios>
     <min-ios-ver>9.2</min-ios-ver>
     <team-id>5G7A26NNNN</team-id>
+    <entitlements>
+      <dict>
+        <key>com.apple.developer.associated-domains</key>
+        <array>
+          <string>applinks:app.piota.co.uk</string>
+          <!--<string>applinks:school.piota.co.uk</string>-->
+        </array>
+        <key>com.apple.developer.associated-domains-test</key>
+        <array>
+          <string>applinks:app.piota.co.uk</string>
+          <string>applinks:school.piota.co.uk</string>
+        </array>
+        <key>wibble</key>
+        <string>blah blah</string>
+        <key>wobble</key>
+        <false/>
+        <key>wabble</key>
+        <true/>
+      </dict>
+    </entitlements>
     <orientations device="iphone">
       <orientation>Ti.UI.PORTRAIT</orientation>
       <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
