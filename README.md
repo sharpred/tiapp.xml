@@ -397,6 +397,16 @@ tiapp.ios.minIosVer = "12.0";
 tiapp.write();
 ```
 
+### ios entitlements
+
+Update entitlements `dict` tag and children.  Supported methods are `getIosEntitlement`, `createIosEntitlement` and `setIosEntitlement`.  Values can be strings, booleans or arrays of strings. Only the factory methods are supported for the moment, no property updates or object getters/setters.  Feel free to send a pull request if you require these features.
+
+```js
+var entitlementText = 'com.apple.developer.associated-domains';
+tiapp.createIosEntitlement(entitlementText, "applinks:app.stepupapps.com");
+tiapp.setIosEntitlement(entitlementText, "applinks:app.stepupapps.com");
+tiapp.getIosEntitlement(entitlementText);
+```
 
 ### doc
 
