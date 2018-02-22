@@ -70,6 +70,7 @@ describe('Tiapp', function () {
             var tmpFile = path.resolve('tmp', 'updated-ios-dot.tiapp.xml');
             tiapp.ios["team-id"] = "ABC123XY99";
             tiapp.ios["min-ios-ver"] = "11.0";
+            tiapp.ios["default-background-color"] = "#c5c5c7"
             var teamId = tiapp.getIosProperty("team-id");
             var minVersion = tiapp.getIosProperty("min-ios-ver");
             teamId.should.equal("ABC123XY99");
@@ -78,6 +79,11 @@ describe('Tiapp', function () {
             tiapp.ios["team-id"].should.equal("ABC123XY99");
             tiapp.ios.minIosVer.should.equal("11.0");
             tiapp.ios["min-ios-ver"].should.equal("11.0");
+            var bgColor = tiapp.getIosProperty("default-background-color");
+            should.exist(bgColor);
+            tiapp.ios.defaultBackgroundColor.should.equal("#c5c5c7");
+            tiapp.ios["default-background-color"].should.equal("#c5c5c7");
+
             tiapp.write(tmpFile);
         });
         it('supported properties should be writeable with camelized notation', function () {
@@ -94,6 +100,8 @@ describe('Tiapp', function () {
             tiapp.ios["team-id"].should.equal("ABC123XY9x");
             tiapp.ios.minIosVer.should.equal("12.0");
             tiapp.ios["min-ios-ver"].should.equal("12.0");
+            tiapp.ios.defaultBackgroundColor = '#C4C4C6';
+            tiapp.ios["default-background-color"].should.equal("#C4C4C6");
             tiapp.write(tmpFile);
         });
         it('non supported properties should should not be updateable', function () {

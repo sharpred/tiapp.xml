@@ -21,6 +21,7 @@
   <ios>
     <min-ios-ver>9.2</min-ios-ver>
     <team-id>5G7A26NNNN</team-id>
+    <default-background-color>#5F5F60</default-background-color>
     <entitlements>
       <dict>
         <key>com.apple.developer.associated-domains</key>
