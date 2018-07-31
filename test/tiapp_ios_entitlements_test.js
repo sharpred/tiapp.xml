@@ -64,10 +64,10 @@ describe('Tiapp', function () {
             var tiapp = tiappXml.parse(tiappText);
             var tmpFile = path.resolve('tmp', 'ios.tiapp.entitlements.write.string.xml');
             var entitlementText = 'com.apple.developer.associated-domains-test3';
-            tiapp.createIosEntitlement(entitlementText, "applinks:faith.piota.co.uk");
+            tiapp.createIosEntitlement(entitlementText, "applinks:app.example.com");
             var entitlement = tiapp.getIosEntitlement(entitlementText);
             should.exist(entitlement);
-            should.deepEqual(entitlement, "applinks:faith.piota.co.uk");
+            should.deepEqual(entitlement, "applinks:app.example.com");
             tiapp.write(tmpFile);
         });
         it('an array of entitlement strings can be created with factory method', function () {
@@ -75,10 +75,10 @@ describe('Tiapp', function () {
             var tiapp = tiappXml.parse(tiappText);
             var tmpFile = path.resolve('tmp', 'ios.tiapp.entitlements.write.array.xml');
             var entitlementText = 'com.apple.developer.associated-domains-test3';
-            tiapp.createIosEntitlement(entitlementText, ["applinks:faith.piota.co.uk", "applinks:app.example.com"]);
+            tiapp.createIosEntitlement(entitlementText, ["applinks:app.example.com", "applinks:app.example.com"]);
             var entitlement = tiapp.getIosEntitlement(entitlementText);
             should.exist(entitlement);
-            should.deepEqual(entitlement, ["applinks:faith.piota.co.uk", "applinks:app.example.com"]);
+            should.deepEqual(entitlement, ["applinks:app.example.com", "applinks:app.example.com"]);
             tiapp.write(tmpFile);
         });
         it('an entitlement boolean of true can be created with factory method', function () {
