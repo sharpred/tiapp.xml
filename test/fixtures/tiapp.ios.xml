@@ -58,7 +58,6 @@
         <string>Can we use your camera?</string>
         <key>NSPhotoLibraryUsageDescription</key>
         <string>Can we save to your library?</string>
-      </dict>
         <key>UISupportedInterfaceOrientations~iphone</key>
         <array>
           <string>UIInterfaceOrientationPortrait</string>
@@ -81,12 +80,12 @@
           <dict>
             <key>CFBundleURLName</key>
             <!-- Application ID same as the id value in the tiapp.xml file -->
-            <string>com.example.app</string>
+            <string>uk.co.piota.app</string>
             <key>CFBundleURLSchemes</key>
             <array>
               <!-- Prefix the Facebook App ID with 'fb' -->
-              <string>fbxxxxxxxxxxxxxx</string>
-              <string>example</string>
+              <string>fb461605170703365</string>
+              <string>piota</string>
             </array>
           </dict>
         </array>
@@ -104,6 +103,7 @@
           <string>fbshareextension</string>
         </array>
         <key>NSAppTransportSecurity</key>
+        <dict>
         <key>NSExceptionDomains</key>
         <dict>
           <key>facebook.com</key>
@@ -128,6 +128,7 @@
             <false/>
           </dict>
         </dict>
+        </dict>
         <key>ITSAppUsesNonExemptEncryption</key>
         <false/>
         <key>NSCalendarsUsageDescription</key>
@@ -141,6 +142,7 @@
         <array>
           <string>applinks:app.example.com</string>
         </array>
+     </dict>
     </plist>
   </ios>
   <android 

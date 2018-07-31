@@ -4,9 +4,8 @@ var _ = require('lodash'),
     path = require('path'),
     should = require('should'),
     tiappXml = require('..'),
-    U = require('../lib/util');
-
-var ROOT = process.cwd(),
+    U = require('../lib/util'),
+    ROOT = process.cwd(),
     TMP = path.resolve('tmp'),
     INVALID_TIAPP_ARGS = [123,
         function () {},
@@ -32,11 +31,11 @@ describe('Tiapp', function () {
         process.chdir(ROOT);
     });
 
-    describe('#Tiapp ios entitlements', function () {
+    describe('#Tiapp ios plist', function () {
         it('should load xml', function () {
             var tiappText = fs.readFileSync(TIAPP_IOS_XML, "utf8");
             var tiapp = tiappXml.parse(tiappText);
-            var tmpFile = path.resolve('tmp', 'ios.tiapp.entitlements.load.xml');
+            var tmpFile = path.resolve('tmp', 'ios.tiapp.plist.load.xml');
             tiapp.id.should.equal('com.example.test');
             //as loaded
             should.exist(tiapp.ios);
@@ -46,26 +45,46 @@ describe('Tiapp', function () {
         });
 
         //read
-        it('entitlements should be readable', function () {
+        it('plist should be readable', function () {
             var tiappText = fs.readFileSync(TIAPP_IOS_XML, "utf8");
             var tiapp = tiappXml.parse(tiappText);
-            var tmpFile = path.resolve('tmp', 'ios.tiapp.entitlements.read.xml');
-            var assocDomainEntitlement = tiapp.getIosEntitlement("com.apple.developer.associated-domains");
-            should.exist(assocDomainEntitlement);
-            should.deepEqual(assocDomainEntitlement, ["applinks:app.example.com"]);
-            var assocDomainEntitlementTwo = tiapp.getIosEntitlement("com.apple.developer.associated-domains-test");
-            should.exist(assocDomainEntitlementTwo);
-            should.deepEqual(assocDomainEntitlementTwo, ["applinks:app.example.com", "applinks:app.example.com"]);
+            var item1 = tiapp.getIosPlist("NSCameraUsageDescription");
+            var item2 = tiapp.getIosPlist("NSLocationWhenInUseUsageDescription");
+            should.exist(item1);
+            should.deepEqual(item1, "Can we use your camera?");
+            should.exist(item2);
+            should.deepEqual(item2, "We use your location to help find you on the map.");
+        });
+
+        //special case
+        it('create bundle url types', function () {
+            var tiappText = fs.readFileSync(TIAPP_IOS_XML, "utf8");
+            var tiapp = tiappXml.parse(tiappText);
+            var tmpFile = path.resolve('tmp', 'ios.tiapp.plist.bundletypes.xml');
+            tiapp.createBundleURLTypes({
+                CFBundleURLName: 'com.example.app',
+                CFBundleURLSchemes: ['fbxxxxxxxxxxxxxx', 'changed']
+            });
+            var item = tiapp.getIosPlist("CFBundleURLTypes");
+            tiapp.write(tmpFile);
+
+            should.exist(item);
+            should.deepEqual(item, [
+                ['CFBundleURLName',
+                    'com.example.app',
+                    'CFBundleURLSchemes', ['fbxxxxxxxxxxxxxx', 'changed']
+                ]
+            ]);
         });
 
         //create
         it('an entitlement string can be created with factory method', function () {
             var tiappText = fs.readFileSync(TIAPP_IOS_XML, "utf8");
             var tiapp = tiappXml.parse(tiappText);
-            var tmpFile = path.resolve('tmp', 'ios.tiapp.entitlements.write.string.xml');
+            var tmpFile = path.resolve('tmp', 'ios.tiapp.plist.write.string.xml');
             var entitlementText = 'com.apple.developer.associated-domains-test3';
-            tiapp.createIosEntitlement(entitlementText, "applinks:app.example.com");
-            var entitlement = tiapp.getIosEntitlement(entitlementText);
+            tiapp.createIosPlistItem(entitlementText, "applinks:app.example.com");
+            var entitlement = tiapp.getIosPlist(entitlementText);
             should.exist(entitlement);
             should.deepEqual(entitlement, "applinks:app.example.com");
             tiapp.write(tmpFile);
@@ -73,10 +92,10 @@ describe('Tiapp', function () {
         it('an array of entitlement strings can be created with factory method', function () {
             var tiappText = fs.readFileSync(TIAPP_IOS_XML, "utf8");
             var tiapp = tiappXml.parse(tiappText);
-            var tmpFile = path.resolve('tmp', 'ios.tiapp.entitlements.write.array.xml');
+            var tmpFile = path.resolve('tmp', 'ios.tiapp.plist.write.array.xml');
             var entitlementText = 'com.apple.developer.associated-domains-test3';
-            tiapp.createIosEntitlement(entitlementText, ["applinks:app.example.com", "applinks:app.example.com"]);
-            var entitlement = tiapp.getIosEntitlement(entitlementText);
+            tiapp.createIosPlistItem(entitlementText, ["applinks:app.example.com", "applinks:app.example.com"]);
+            var entitlement = tiapp.getIosPlist(entitlementText);
             should.exist(entitlement);
             should.deepEqual(entitlement, ["applinks:app.example.com", "applinks:app.example.com"]);
             tiapp.write(tmpFile);
@@ -84,10 +103,10 @@ describe('Tiapp', function () {
         it('an entitlement boolean of true can be created with factory method', function () {
             var tiappText = fs.readFileSync(TIAPP_IOS_XML, "utf8");
             var tiapp = tiappXml.parse(tiappText);
-            var tmpFile = path.resolve('tmp', 'ios.tiapp.entitlements.write.true.xml');
+            var tmpFile = path.resolve('tmp', 'ios.tiapp.plist.write.true.xml');
             var entitlementText = 'wobble4';
-            tiapp.createIosEntitlement(entitlementText, true);
-            var entitlement = tiapp.getIosEntitlement(entitlementText);
+            tiapp.createIosPlistItem(entitlementText, true);
+            var entitlement = tiapp.getIosPlist(entitlementText);
             should.exist(entitlement);
             should.equal(entitlement, true);
             tiapp.write(tmpFile);
@@ -95,23 +114,23 @@ describe('Tiapp', function () {
         it('an entitlement boolean of false can be created with factory method', function () {
             var tiappText = fs.readFileSync(TIAPP_IOS_XML, "utf8");
             var tiapp = tiappXml.parse(tiappText);
-            var tmpFile = path.resolve('tmp', 'ios.tiapp.entitlements.write.false.xml');
+            var tmpFile = path.resolve('tmp', 'ios.tiapp.plist.write.false.xml');
             var entitlementText = 'wobble5';
-            tiapp.createIosEntitlement(entitlementText, false);
-            var entitlement = tiapp.getIosEntitlement(entitlementText);
+            tiapp.createIosPlistItem(entitlementText, false);
+            var entitlement = tiapp.getIosPlist(entitlementText);
             should.exist(entitlement);
             should.equal(entitlement, false);
             tiapp.write(tmpFile);
         });
 
         //set
-        it('an entitlement string can be created with factory method', function () {
+        it('an entitlement string can be set with factory method', function () {
             var tiappText = fs.readFileSync(TIAPP_IOS_XML, "utf8");
             var tiapp = tiappXml.parse(tiappText);
-            var tmpFile = path.resolve('tmp', 'ios.tiapp.entitlements.set.string.xml');
+            var tmpFile = path.resolve('tmp', 'ios.tiapp.plist.set.string.xml');
             var entitlementText = 'com.apple.developer.associated-domains-test';
-            tiapp.setIosEntitlement(entitlementText, "applinks:set.piota.co.uk");
-            var entitlement = tiapp.getIosEntitlement(entitlementText);
+            tiapp.setIosPlistItem(entitlementText, "applinks:set.piota.co.uk");
+            var entitlement = tiapp.getIosPlist(entitlementText);
             should.exist(entitlement);
             should.deepEqual(entitlement, "applinks:set.piota.co.uk");
             tiapp.write(tmpFile);
